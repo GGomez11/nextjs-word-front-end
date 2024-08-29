@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className="h-full bg-gradient-to-t from-lowerGradient to-upperGradient overflow-hidden">
+      <body className="h-full bg-gradient-to-t from-lowerGradient to-upperGradient">
         <Navbar/>
         {children}
       </body>
