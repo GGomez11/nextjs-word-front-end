@@ -16,6 +16,10 @@ const config: Config = {
       colors: {
         'lowerGradient': '#001A49',
         'upperGradient': '#0070AF'
+      },
+      screens: {
+        'xs': '375px',
+        'zeroWidth': '0px'
       }
     },
   },
