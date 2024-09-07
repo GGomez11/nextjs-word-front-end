@@ -55,12 +55,14 @@ export default function Home() {
           <div className="text-4xl basis-3/5">
             <p className="whitespace-pre md:min-h-40" ref={storeDefinitionsDesktop}></p>
             <div className="mt-7">
-              <button>Get Started</button>
+              <Button variant="contained" className="capitalize w-40 h-14" size="large">
+                Get Started 
+              </Button>
             </div>
           </div>
         </div>
-        <div className="basis-2/5 flex flex-col justify-center">
-          <div>Card Card</div>
+        <div className="basis-2/5 flex flex-col justify-center content-center">
+          <WordCard></WordCard>
         </div>
       </div>
     </div>
