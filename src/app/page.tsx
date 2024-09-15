@@ -1,10 +1,10 @@
 'use client'
 
-import Image from "next/image";
 import WordCard from "./components/wordcard";
 import Button from '@mui/material/Button';
-import React, {useEffect} from 'react';
+import React from 'react';
 import Typed from 'typed.js';
+import { doSocialLogin } from "./actions";
 
 
 export default function Home() {
@@ -41,9 +41,11 @@ export default function Home() {
           <WordCard></WordCard>
         </div>
         <div>
-          <Button variant="contained" className="capitalize" size="large">
-            Get Started 
-          </Button>
+          <form action={doSocialLogin}>
+            <Button type="submit" variant="contained" className="capitalize" size="large">
+              Get Started 
+            </Button>
+          </form>
         </div>
       </div>
       {/* Desktop View */} 
@@ -55,9 +57,11 @@ export default function Home() {
           <div className="text-4xl basis-3/5">
             <p className="whitespace-pre md:min-h-40" ref={storeDefinitionsDesktop}></p>
             <div className="mt-7">
-              <Button variant="contained" className="capitalize w-40 h-14" size="large">
-                Get Started 
-              </Button>
+              <form action={doSocialLogin}>
+                <Button type="submit" variant="contained" className="capitalize w-40 h-14" size="large">
+                  Get Started 
+                </Button>
+              </form>
             </div>
           </div>
         </div>
