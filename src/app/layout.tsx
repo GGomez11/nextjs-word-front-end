@@ -26,7 +26,9 @@ export default function RootLayout({
     <html lang="en" className={myFont.className + ' h-full'}>
       <body className="h-full bg-gradient-to-t from-lowerGradient to-upperGradient">
         <Navbar/>
-        {children}
+        <div className="h-full">
+          {children}
+        </div>
       </body>
     </html>
   );
