@@ -5,11 +5,14 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import Typed from 'typed.js';
 import { doSocialLogin } from "./actions";
-
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const storeDefinitionsMobile = React.useRef(null);
   const storeDefinitionsDesktop = React.useRef(null);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   React.useEffect(() => {
     const typed = new Typed(storeDefinitionsMobile.current, {
@@ -29,6 +32,14 @@ export default function Home() {
     }
   })
 
+  const handleClick = () => {
+    if (session?.user) {
+      router.push('/home')
+    } else {
+      doSocialLogin()
+    }
+  }
+
   return (
     <div className="h-full" >
       {/* Mobile View */} 
@@ -41,11 +52,9 @@ export default function Home() {
           <WordCard></WordCard>
         </div>
         <div>
-          <form action={doSocialLogin}>
-            <Button type="submit" variant="contained" className="capitalize" size="large">
+            <Button onClick={handleClick} type="submit" variant="contained" className="capitalize" size="large">
               Get Started 
             </Button>
-          </form>
         </div>
       </div>
       {/* Desktop View */} 
@@ -57,11 +66,9 @@ export default function Home() {
           <div className="text-4xl basis-3/5">
             <p className="whitespace-pre md:min-h-40" ref={storeDefinitionsDesktop}></p>
             <div className="mt-7">
-              <form action={doSocialLogin}>
-                <Button type="submit" variant="contained" className="capitalize w-40 h-14" size="large">
-                  Get Started 
-                </Button>
-              </form>
+              <Button onClick={handleClick} type="submit" variant="contained" className="capitalize w-40 h-14" size="large">
+                Get Started 
+              </Button>
             </div>
           </div>
         </div>
