@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar";
 import localFont from 'next/font/local';
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <SessionProvider>
     <html lang="en" className={myFont.className + ' h-full'}>
       <body className="h-full bg-gradient-to-t from-lowerGradient to-upperGradient">
         <Navbar/>
@@ -31,5 +33,6 @@ export default function RootLayout({
         </div>
       </body>
     </html>
+    </SessionProvider>
   );
 }
