@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import { doLogout } from "../actions";
 import { auth } from "@/app/auth";
 import Image from 'next/image';
+import Link from "next/link";
 
 export default async function Navbar() {
     const session = await auth();
@@ -9,7 +10,9 @@ export default async function Navbar() {
     return (        
         <div className="w-full h-10 bg-white border-black border-b-1 absolute">
             <div className="h-full flex justify-between items-center mx-6 py-4">
-                <p className="text-black">Words</p>
+                <Link href="/">
+                    <p className="text-black">Words</p>
+                </Link>
                 { (session?.user) &&
                     <form action={doLogout} className="flex justify-end">
                         <Button type="submit" className="p-0 flex justify-end"> 
