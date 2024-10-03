@@ -25,14 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <SessionProvider>
-    <html lang="en" className={myFont.className + ' h-full'}>
-      <body className="h-full bg-gradient-to-t from-lowerGradient to-upperGradient">
-        <Navbar/>
-        <div className="h-full pt-10">
-          {children}
-        </div>
-      </body>
-    </html>
+      <html lang="en" className={`${myFont.className} min-h-screen`}>
+        <body className="min-h-screen bg-gradient-to-t from-lowerGradient to-upperGradient flex flex-col">
+          <Navbar />
+          <div className="flex-grow pt-10">
+            {children}
+          </div>
+        </body>
+      </html>
     </SessionProvider>
   );
 }
