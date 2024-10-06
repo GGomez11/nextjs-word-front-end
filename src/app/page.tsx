@@ -1,6 +1,6 @@
 'use client'
 
-import WordCard from "./components/wordcard";
+import WordCard from "./components/wordCard";
 import Button from '@mui/material/Button';
 import React from 'react';
 import Typed from 'typed.js';
