@@ -8,7 +8,7 @@ export default async function Navbar() {
     const session = await auth();
     
     return (        
-        <div className="w-full h-10 bg-white border-black border-b-1 absolute">
+        <div className="w-full h-10 bg-white border-black border-b-1">
             <div className="h-full flex justify-between items-center mx-6 py-4">
                 <Link href="/">
                     <p className="text-black">Words</p>

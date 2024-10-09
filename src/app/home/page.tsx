@@ -9,9 +9,9 @@ export default async function Home() {
     if (!session?.user) redirect("/");
 
     return (
-        <div className="h-full flex flex-col justify-evenly items-center">
+        <div className="flex flex-col justify-evenly items-center">
+            <div className="pb-4 sm:text-xl md:text-2xl lg:text-3xl gap-y-3 px-10 zeroWidth:hidden xl:block">Welcome {session?.user.name}, here are your words.</div>
             <SearchBar/>
-            <div className="pb-4 sm:text-xl md:text-2xl lg:text-3xl px-10 zeroWidth:hidden xl:block">Welcome {session?.user.name}, here are your words.</div>
             <div className="grid zeroWidth:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                 <div className="mb-10 flex flex-row justify-center w-full">
                     <WordCard/> 

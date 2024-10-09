@@ -28,7 +28,7 @@ export default function RootLayout({
       <html lang="en" className={`${myFont.className} min-h-screen`}>
         <body className="min-h-screen bg-gradient-to-t from-lowerGradient to-upperGradient flex flex-col">
           <Navbar/>
-          <div className="flex-grow h-[calc(100vh-40px)]">
+          <div className="flex flex-grow justify-center">
             {children}
           </div>
         </body>

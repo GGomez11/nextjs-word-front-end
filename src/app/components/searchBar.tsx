@@ -15,7 +15,7 @@ export default function SearchBar() {
     
     return (
         <div className='basis-36 flex flex-col justify-center items-center w-full'>
-            <form className='w-2/4'>
+            <form className='zeroWidth:w-3/4 md:w-'>
                 <input
                     type="text"
                     value={query}
