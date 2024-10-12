@@ -20,7 +20,7 @@ export default function SearchBar() {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search..."
+                    placeholder="Search your word library"
                     className="p-2 border w-full text-black bg-greyAccent border-gray-300 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             {/* <button
