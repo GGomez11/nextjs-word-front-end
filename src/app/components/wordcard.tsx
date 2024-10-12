@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from "react"
+import { useState } from "react";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function WordCard({className = ''}) {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -10,7 +12,7 @@ export default function WordCard({className = ''}) {
     const words = [
         {
             'word': 'Dog',
-            'defintion': 'a domesticated carnivorous mammal that typically has a long snout, an acute  ...',
+            'defintion': 'a domesticated carnivorous mammal that has a long snout, an acute  ...',
         },
         {
             'word': 'Ephemeral',
@@ -34,10 +36,20 @@ export default function WordCard({className = ''}) {
         }, 400);
     };
 
+    const handleDelete = (event: Event) => {
+        event.stopPropagation();
+        console.log('handle delete')
+    }
+
+
     return (
         <div onClick={handleFlip} className={`${className} flex text-black flex-col bg-white p-4 rounded-lg zeroWidth:w-4/5 md:w-4/5 lg:w-4/5 zeroWidth:h-44 md:h-36 lg:h-44 md:h-52 p-5
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
-            <div className={`flex flex-col justify-evenly w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
+            <div className={`relative flex flex-col justify-evenly w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
+                {!displayText &&
+                <IconButton onClick={handleDelete} size="small" className="absolute -right-2 top-0 flex"> 
+                   <DeleteIcon fontSize="inherit"/>
+                </IconButton>}
                 <div>
                     {!displayText && <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>}
                 </div>

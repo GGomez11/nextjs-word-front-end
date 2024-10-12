@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import { doLogout } from "../actions";
 import { auth } from "@/app/auth";
-import Image from 'next/image';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Link from "next/link";
 
 export default async function Navbar() {
@@ -15,13 +15,8 @@ export default async function Navbar() {
                 </Link>
                 { (session?.user) &&
                     <form action={doLogout} className="flex justify-end">
-                        <Button type="submit" className="p-0 flex justify-end"> 
-                            <Image
-                                src="logout.svg"
-                                width={30}
-                                height={30}
-                                alt="Log out icon"
-                            />
+                        <Button type="submit" className="p-0 flex -right-2"> 
+                            <LogoutIcon/>
                         </Button>
                     </form>
                 }
