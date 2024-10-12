@@ -32,7 +32,6 @@ export default async function Home() {
                     <WordCard/>
                 </div>
             </div>
-            <div className="">Navigation Buttons</div>
         </div>
     )
 }
