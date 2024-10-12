@@ -1,8 +1,9 @@
-import Button from "@mui/material/Button";
 import { doLogout } from "../actions";
 import { auth } from "@/app/auth";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Link from "next/link";
+import Tooltip from '@mui/material/Tooltip';
+import { IconButton } from "@mui/material";
 
 export default async function Navbar() {
     const session = await auth();
@@ -15,9 +16,11 @@ export default async function Navbar() {
                 </Link>
                 { (session?.user) &&
                     <form action={doLogout} className="flex justify-end">
-                        <Button type="submit" className="p-0 flex -right-2"> 
-                            <LogoutIcon/>
-                        </Button>
+                        <Tooltip title="Log out">
+                            <IconButton type="submit" color="primary"> 
+                                <LogoutIcon/>
+                            </IconButton>
+                        </Tooltip>
                     </form>
                 }
             </div>

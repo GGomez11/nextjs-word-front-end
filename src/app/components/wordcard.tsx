@@ -3,8 +3,18 @@
 import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
 
-export default function WordCard({className = ''}) {
+/* Word Objact
+// {
+    'word': 'test',
+    'definition': 'fdsafs',
+    'synonym: '',
+    'pronunciation: '',
+*/ 
+
+
+export default function WordCard({className = '', empty = false}) {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isFlipping, setIsFlipping] = useState(false);
     const [displayText, setDisplayText] = useState(false);
@@ -47,9 +57,12 @@ export default function WordCard({className = ''}) {
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
             <div className={`relative flex flex-col justify-evenly w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
                 {!displayText &&
-                <IconButton onClick={handleDelete} size="small" className="absolute -right-2 top-0 flex"> 
-                   <DeleteIcon fontSize="inherit"/>
-                </IconButton>}
+                <Tooltip title="Remove word">
+                    <IconButton onClick={handleDelete} size="small" className="absolute -right-2 top-0 flex"> 
+                        <DeleteIcon fontSize="inherit"/>
+                    </IconButton>
+                </Tooltip>
+                }
                 <div>
                     {!displayText && <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>}
                 </div>
