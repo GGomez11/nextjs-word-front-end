@@ -4,6 +4,7 @@ import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
+import { WordCardProps } from "../types/wordCardProps";
 
 /* Word Objact
 // {
@@ -14,22 +15,11 @@ import Tooltip from '@mui/material/Tooltip';
 */ 
 
 
-export default function WordCard({className = '', empty = false}) {
+export default function WordCard({className = '', word}: WordCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isFlipping, setIsFlipping] = useState(false);
     const [displayText, setDisplayText] = useState(false);
     
-    const words = [
-        {
-            'word': 'Dog',
-            'defintion': 'a domesticated carnivorous mammal that has a long snout, an acute  ...',
-        },
-        {
-            'word': 'Ephemeral',
-            'defintion': 'lasting for a very short time',
-        }
-    ]
-    const [word, setWord] = useState(words[0])
     let counter = 0
     setInterval(() => {
     }, 2000)
@@ -67,7 +57,7 @@ export default function WordCard({className = '', empty = false}) {
                     {!displayText && <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>}
                 </div>
                 <div className="flex w-fit justify-center overflow">
-                    {!displayText && <p className="zeroWidth:text-base">{word.defintion}</p>}
+                    {!displayText && <p className="zeroWidth:text-base">{word.definition}</p>}
                 </div>
             </div>
             <div className={`w-full h-full bg-white flex justify-center items-center rounded-lg rotate-y-180 ${isFlipped ? '' : 'hidden'}`}>
