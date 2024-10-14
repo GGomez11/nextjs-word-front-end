@@ -14,6 +14,13 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  let word = {
+    word: 'Dog',
+    definition: 'a domesticated carnivorous mammal that has a long snout, an acute  ...',
+    synonym: 'canine',
+    pronunciation: 'dawg',
+}
+
   React.useEffect(() => {
     const typed = new Typed(storeDefinitionsMobile.current, {
       strings: ['Store definitions.\nLearn pronunciations.\nFind synonyms.'],
@@ -49,7 +56,7 @@ export default function Home() {
           <p className="zeroWidth:hidden md:block lg:hidden md:min-h-28 md:text-3xl 2xl:text-6xl whitespace-pre" ref={storeDefinitionsMobile}> </p>
         </div>
         <div className="w-full flex justify-center ">
-          <WordCard></WordCard>
+          <WordCard word={word}></WordCard>
         </div>
         <div>
             <Button onClick={handleClick} type="submit" variant="contained" className="capitalize" size="large">
@@ -73,7 +80,7 @@ export default function Home() {
           </div>
         </div>
         <div className="basis-2/5 flex flex-col justify-center content-center">
-          <WordCard></WordCard>
+          <WordCard word={word}></WordCard>
         </div>
       </div>
     </div>

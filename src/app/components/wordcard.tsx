@@ -6,15 +6,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
 
-/* Word Objact
-// {
-    'word': 'test',
-    'definition': 'fdsafs',
-    'synonym: '',
-    'pronunciation: '',
-*/ 
-
-
 export default function WordCard({className = '', word}: WordCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isFlipping, setIsFlipping] = useState(false);
@@ -43,12 +34,12 @@ export default function WordCard({className = '', word}: WordCardProps) {
 
 
     return (
-        <div onClick={handleFlip} className={`${className} flex text-black flex-col bg-white p-4 rounded-lg zeroWidth:w-4/5 md:w-4/5 lg:w-4/5 zeroWidth:h-44 md:h-36 lg:h-44 md:h-52 p-5
+        <div onClick={handleFlip} className={`${className} flex text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-36 lg:h-44 md:h-52
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
             <div className={`relative flex flex-col justify-evenly w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
                 {!displayText &&
                 <Tooltip title="Remove word">
-                    <IconButton onClick={handleDelete} size="small" className="absolute -right-2 top-0 flex"> 
+                    <IconButton onClick={handleDelete} size="small" className="absolute -right-2 top-2 flex"> 
                         <DeleteIcon fontSize="inherit"/>
                     </IconButton>
                 </Tooltip>
