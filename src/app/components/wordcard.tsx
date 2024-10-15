@@ -10,7 +10,8 @@ export default function WordCard({className = '', word}: WordCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isFlipping, setIsFlipping] = useState(false);
     const [displayText, setDisplayText] = useState(false);
-    
+    const [displayedDefinition, setDisplayedDefinition] = useState(word.results[0])
+
     let counter = 0
     setInterval(() => {
     }, 2000)
@@ -48,7 +49,7 @@ export default function WordCard({className = '', word}: WordCardProps) {
                     {!displayText && <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>}
                 </div>
                 <div className="flex w-fit justify-center overflow">
-                    {!displayText && <p className="zeroWidth:text-base">{word.definition}</p>}
+                    {!displayText && <p className="zeroWidth:text-base">{displayedDefinition.definition}</p>}
                 </div>
             </div>
             <div className={`w-full h-full bg-white flex justify-center items-center rounded-lg rotate-y-180 ${isFlipped ? '' : 'hidden'}`}>
