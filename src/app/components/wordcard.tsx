@@ -35,12 +35,12 @@ export default function WordCard({className = '', word}: WordCardProps) {
 
 
     return (
-        <div onClick={handleFlip} className={`${className} flex text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-36 lg:h-44 md:h-52
+        <div onClick={handleFlip} className={`${className} flex zeroWidth:w-96 xl:w-[290px] text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-36 lg:h-44 xl:h-[350px] md:h-52 xl:p-3
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
-            <div className={`relative flex flex-col justify-evenly w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
+            <div className={`relative flex flex-col justify-evenly xl:justify-start w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
                 {!displayText &&
                 <Tooltip title="Remove word">
-                    <IconButton onClick={handleDelete} size="small" className="absolute -right-2 top-2 flex"> 
+                    <IconButton onClick={handleDelete} size="small" className="absolute zeroWidth:-right-2 xl:right-0 zeroWidth:top-2 xl:top-0 flex"> 
                         <DeleteIcon fontSize="inherit"/>
                     </IconButton>
                 </Tooltip>
@@ -48,12 +48,18 @@ export default function WordCard({className = '', word}: WordCardProps) {
                 <div>
                     {!displayText && <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>}
                 </div>
+                {!displayText && <hr className="my-2 border-t-1 border-black w-full hidden xl:block" /> }
                 <div className="flex w-fit justify-center overflow">
                     {!displayText && <p className="zeroWidth:text-base">{displayedDefinition.definition}</p>}
                 </div>
             </div>
             <div className={`w-full h-full bg-white flex justify-center items-center rounded-lg rotate-y-180 ${isFlipped ? '' : 'hidden'}`}>
-                {displayText && <p className="text-black zeroWidth:text-base sm:text-xl">Back Side</p>} 
+                {displayText && 
+                <div>
+                    <p className="text-black zeroWidth:text-base sm:text-xl">Synonym: 'bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'</p>
+                    <p className="text-black zeroWidth:text-base sm:text-xl">Pronunciation: {word.pronunciation}</p>
+                </div>
+                } 
             </div> 
         </div>
     )
