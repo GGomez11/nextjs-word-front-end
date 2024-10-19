@@ -35,7 +35,7 @@ export default function WordCard({className = '', word}: WordCardProps) {
 
 
     return (
-        <div onClick={handleFlip} className={`${className} flex zeroWidth:w-96 xl:w-[290px] text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-36 lg:h-44 xl:h-[350px] md:h-52 xl:p-3
+        <div onClick={handleFlip} className={`${className} flex zeroWidth:w-96 xl:w-[290px] text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-52 lg:h-44 xl:h-[350px] xl:p-3
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
             <div className={`relative flex flex-col justify-evenly xl:justify-start w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
                 {!displayText &&
