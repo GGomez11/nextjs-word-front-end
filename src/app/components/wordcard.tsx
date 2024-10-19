@@ -39,6 +39,9 @@ export default function WordCard({className = '', word}: WordCardProps) {
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
             <div className={`relative flex flex-col justify-evenly xl:justify-start w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
                 {!displayText &&
+                    <span className="absolute zeroWidth:-left-2 xl:left-0 zeroWidth:top-2 xl:top-0">1/{word.results.length}</span>
+                }
+                {!displayText &&
                 <Tooltip title="Remove word">
                     <IconButton onClick={handleDelete} size="small" className="absolute zeroWidth:-right-2 xl:right-0 zeroWidth:top-2 xl:top-0 flex"> 
                         <DeleteIcon fontSize="inherit"/>
