@@ -105,6 +105,9 @@ export default async function Home() {
                         <WordCard word={word}/> 
                     </div>
                 ))}
+                <div className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
+                    <EmptyWordCard/>
+                </div>
             </div>
         </div>
     )
