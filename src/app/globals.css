@@ -36,3 +36,16 @@ body {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+.word-card {
+}
+
+.arrows {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: flex;
+}
+
+.word-card:hover .arrows {
+  opacity: 1;
+}
