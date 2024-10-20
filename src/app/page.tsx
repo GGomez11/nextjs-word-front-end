@@ -14,12 +14,21 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  let word = {
-    word: 'Dog',
-    definition: 'a domesticated carnivorous mammal that has a long snout, an acute  ...',
-    synonym: 'canine',
-    pronunciation: 'dawg',
-}
+  let word =  {
+    word: 'Diminutive',
+    results: [
+        {
+            definition: 'very small',
+            partOfSpeech: 'adjective',
+            synonym: ['bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'],
+        },
+        {
+            definition: 'a word that is formed with a suffix (such as -let or -kin) to indicate smallness',
+            partOfSpeech: 'noun'
+        }
+    ],
+    pronunciation: `dɪ'mɪnjətɪv`,
+};
 
   React.useEffect(() => {
     const typed = new Typed(storeDefinitionsMobile.current, {
