@@ -15,7 +15,12 @@ const config: Config = {
       },
       colors: {
         'lowerGradient': '#001A49',
-        'upperGradient': '#0070AF'
+        'upperGradient': '#0070AF',
+        'greyAccent': "#EEEEF4"
+      },
+      screens: {
+        'xs': '375px',
+        'zeroWidth': '0px'
       }
     },
   },

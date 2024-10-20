@@ -2,8 +2,16 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar";
+import localFont from 'next/font/local';
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
+
+// Font files can be colocated inside of `app`
+const myFont = localFont({
+  src: './cambria-font.ttf',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,11 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="h-full bg-gradient-to-t from-lowerGradient to-upperGradient overflow-hidden">
-        <Navbar/>
-        {children}
-      </body>
-    </html>
+    <SessionProvider>
+      <html lang="en" className={`${myFont.className} min-h-screen`}>
+        <body className="min-h-screen bg-gradient-to-t from-lowerGradient to-upperGradient flex flex-col">
+          <Navbar/>
+          <div className="flex flex-grow justify-center">
+            {children}
+          </div>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
