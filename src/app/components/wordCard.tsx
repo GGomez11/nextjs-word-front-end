@@ -57,30 +57,35 @@ export default function WordCard({className = '', word}: WordCardProps) {
         <div onClick={handleFlip} className={`${className} word-card flex zeroWidth:w-96 xl:w-[290px] text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-52 lg:h-44 xl:h-[350px] xl:p-3
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
             <div className={`relative flex flex-col justify-evenly xl:justify-start w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
-                {!displayText &&
-                    <span className="absolute zeroWidth:-left-2 xl:left-0 zeroWidth:top-2 xl:top-0">{currentIndex+1}/{word.results.length}</span>
+                {!displayText && (
+                    <>
+                    {/* Header */}
+                    <div>
+                        <span className="absolute zeroWidth:-left-2 xl:left-0 zeroWidth:top-2 xl:top-0">{currentIndex+1}/{word.results.length}</span>
+                        <Tooltip title="Remove word">
+                        <IconButton onClick={handleDelete} size="small" className="absolute zeroWidth:-right-2 xl:right-0 zeroWidth:top-2 xl:top-0 flex"> 
+                            <DeleteIcon fontSize="inherit"/>
+                        </IconButton>
+                        </Tooltip>
+                        <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>
+                    </div>
+                    <hr className="my-2 border-t-1 border-black w-full hidden xl:block" />
+                    {/* Body of card */}
+                    <div className="flex w-fit justify-center overflow">
+                        <p className="zeroWidth:text-base">{displayedDefinition.definition}</p>
+                    </div>
+                    </>)
                 }
-                {!displayText &&
-                <Tooltip title="Remove word">
-                    <IconButton onClick={handleDelete} size="small" className="absolute zeroWidth:-right-2 xl:right-0 zeroWidth:top-2 xl:top-0 flex"> 
-                        <DeleteIcon fontSize="inherit"/>
+                {/* Arrows */}
+                {!displayText && word.results.length > 1 && 
+                <>
+                    <IconButton onClick={handlePreviousDefinition} className="absolute zeroWidth:top-1/3 xl:top-2/4 -left-1 arrows"> 
+                        <ArrowBack fontSize="inherit"/>
                     </IconButton>
-                </Tooltip>
-                }
-                <div>
-                    {!displayText && <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>}
-                </div>
-                {!displayText && <hr className="my-2 border-t-1 border-black w-full hidden xl:block" /> }
-                <div className="flex w-fit justify-center overflow">
-                    {!displayText && <p className="zeroWidth:text-base">{displayedDefinition.definition}</p>}
-                </div>
-                {!displayText && word.results.length > 1 && <div><IconButton onClick={handlePreviousDefinition} className="absolute zeroWidth:top-1/3 xl:top-2/4 -left-1 arrows"> 
-                    <ArrowBack fontSize="inherit"/>
-                </IconButton>
-                <IconButton onClick={handleNextDefinition} className="absolute zeroWidth:top-1/3 xl:top-2/4 -right-1 arrows"> 
-                    <ArrowForward fontSize="inherit"/>
-                </IconButton>
-                </div>
+                    <IconButton onClick={handleNextDefinition} className="absolute zeroWidth:top-1/3 xl:top-2/4 -right-1 arrows"> 
+                        <ArrowForward fontSize="inherit"/>
+                    </IconButton>
+                </>
                 }
             </div>
             <div className={`w-full h-full bg-white flex justify-center items-center rounded-lg rotate-y-180 ${isFlipped ? '' : 'hidden'}`}>
