@@ -74,7 +74,7 @@ export default function WordCard({className = '', word}: WordCardProps) {
                 <div className="flex w-fit justify-center overflow">
                     {!displayText && <p className="zeroWidth:text-base">{displayedDefinition.definition}</p>}
                 </div>
-                {!displayText && <div><IconButton onClick={handlePreviousDefinition} className="absolute zeroWidth:top-1/3 xl:top-2/4 -left-1 arrows"> 
+                {!displayText && word.results.length > 1 && <div><IconButton onClick={handlePreviousDefinition} className="absolute zeroWidth:top-1/3 xl:top-2/4 -left-1 arrows"> 
                     <ArrowBack fontSize="inherit"/>
                 </IconButton>
                 <IconButton onClick={handleNextDefinition} className="absolute zeroWidth:top-1/3 xl:top-2/4 -right-1 arrows"> 
