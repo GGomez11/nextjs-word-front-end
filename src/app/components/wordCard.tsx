@@ -89,11 +89,11 @@ export default function WordCard({className = '', word}: WordCardProps) {
                 </>
                 }
             </div>
-            <div className={`w-full h-full bg-white flex justify-center items-center rounded-lg rotate-y-180 ${isFlipped ? '' : 'hidden'}`}>
+            <div className={`w-full h-full bg-white flex justify-center items-end rounded-lg rotate-y-180 ${isFlipped ? '' : 'hidden'}`}>
                 {displayText && 
-                <div>
-                    <p className="text-black zeroWidth:text-base sm:text-xl">Synonym: 'bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'</p>
-                    <p className="text-black zeroWidth:text-base sm:text-xl">Pronunciation: {word.pronunciation}</p>
+                <div className="flex flex-col h-full">
+                    <p className="text-black zeroWidth:text-base sm:text-xl basis-2/4">Pronunciation: {word.pronunciation}</p>
+                    <p className="text-black zeroWidth:text-base sm:text-xl basis-2/4">Synonym: 'bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'</p>
                 </div>
                 } 
             </div> 
