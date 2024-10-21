@@ -1,11 +1,15 @@
-import { auth } from "@/app/auth";
+'use client'
+
 import { redirect } from "next/navigation";
 import WordCard from "../components/wordCard";
 import SearchBar from "../components/searchBar";
 import EmptyWordCard from "../components/emptyWordCard";
+import { useSession } from "next-auth/react";
 
 
-export default async function Home() {
+export default function Home() {
+    const { data: session, status } = useSession();
+
     let res = {
         "words": [
         {
@@ -92,9 +96,11 @@ export default async function Home() {
         },
     ]}
     
-    const session = await auth();
+    // const session = await auth();
     
-    if (!session?.user) redirect("/");
+    if (!session) {
+        if (!session) redirect("/");
+    };
 
     return (
         <div className="flex flex-col justify-start items-center">

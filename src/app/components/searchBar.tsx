@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react';
+import { SearchBarProps } from '../types/searchBarProps';
 
 export default function SearchBar() {
-    const [query, setQuery] = useState('');
-
+    
     const handleSearch = (e) => {
         // e.preventDefault();
         // if (onSearch) {
@@ -18,8 +18,8 @@ export default function SearchBar() {
             <form className='zeroWidth:w-3/4 md:w-'>
                 <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    // value={query}
+                    // onChange={(e) => {setQuery(e.target.value)}}
                     placeholder="Search your word library"
                     className="p-2 border w-full text-black bg-greyAccent border-gray-300 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />

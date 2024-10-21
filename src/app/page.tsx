@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import Typed from 'typed.js';
 import { doSocialLogin } from "./actions";
-import { useSession } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -49,10 +49,10 @@ export default function Home() {
   })
 
   const handleClick = () => {
-    if (session?.user) {
+    if (session) {
       router.push('/home')
     } else {
-      doSocialLogin()
+      signIn()
     }
   }
 
