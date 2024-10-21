@@ -3,6 +3,7 @@ export interface Word {
     results: [{
         definition: string,
         synonym?: string,
+        partOfSpeech: string,
     }]
     pronunciation?: string,
 }
