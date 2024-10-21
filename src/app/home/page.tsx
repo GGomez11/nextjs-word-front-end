@@ -5,10 +5,13 @@ import WordCard from "../components/wordCard";
 import SearchBar from "../components/searchBar";
 import EmptyWordCard from "../components/emptyWordCard";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 
 export default function Home() {
     const { data: session, status } = useSession();
+    const router = useRouter();
 
     let res = {
         "words": [
@@ -96,18 +99,23 @@ export default function Home() {
         },
     ]}
     
-    // const session = await auth();
+    useEffect(() => {
+        if (status === 'loading') {
+          // Can load spinnger
+          return;
+        }
     
-    if (!session) {
-        if (!session) redirect("/");
-    };
+        if (status === 'unauthenticated') {
+          router.push('/')
+        }
+      }, [status, router]);
 
     return (
         <div className="flex flex-col justify-start items-center">
             <SearchBar/>
             <div className="grid zeroWidth:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-                {res.words.map((word: any) => (
-                    <div className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
+                {res.words.map((word: any, index: number) => (
+                    <div key={index} className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
                         <WordCard word={word}/> 
                     </div>
                 ))}
