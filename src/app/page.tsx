@@ -4,7 +4,6 @@ import WordCard from "./components/wordCard";
 import Button from '@mui/material/Button';
 import React from 'react';
 import Typed from 'typed.js';
-import { doSocialLogin } from "./actions";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 
