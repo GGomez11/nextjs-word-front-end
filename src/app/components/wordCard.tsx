@@ -61,13 +61,14 @@ export default function WordCard({className = '', word}: WordCardProps) {
                     <>
                     {/* Header */}
                     <div>
-                        <span className="absolute zeroWidth:-left-2 xl:left-0 zeroWidth:top-2 xl:top-0">{currentIndex+1}/{word.results.length}</span>
+                        <span className="absolute zeroWidth:-left-2 xl:left-0 zeroWidth:top-2 xl:top-1">{currentIndex+1}/{word.results.length}</span>
                         <Tooltip title="Remove word">
-                        <IconButton onClick={handleDelete} size="small" className="absolute zeroWidth:-right-2 xl:right-0 zeroWidth:top-2 xl:top-0 flex"> 
+                        <IconButton onClick={handleDelete} size="small" className="absolute zeroWidth:-right-2 xl:right-0 zeroWidth:top-2 xl:top-1 flex"> 
                             <DeleteIcon fontSize="inherit"/>
                         </IconButton>
                         </Tooltip>
                         <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>
+                        <span className="absolute bottom-0 right-0">({displayedDefinition.partOfSpeech})</span>
                     </div>
                     <hr className="my-2 border-t-1 border-black w-full hidden xl:block" />
                     {/* Body of card */}
