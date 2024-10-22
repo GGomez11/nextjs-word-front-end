@@ -1,6 +1,6 @@
 import React from 'react';
 
 export interface SearchBarProps {
-    query: string,
-    setQuery: setQuery: React.Dispatch<React.SetStateAction<string>>;
+    searchQuery: string,
+    setSearchQuery: setQuery: React.Dispatch<React.SetStateAction<string>>;
 }

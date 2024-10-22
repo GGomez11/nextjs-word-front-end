@@ -5,14 +5,14 @@ import WordCard from "../components/wordCard";
 import SearchBar from "../components/searchBar";
 import EmptyWordCard from "../components/emptyWordCard";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 
 export default function Home() {
     const { data: session, status } = useSession();
     const router = useRouter();
-
+    
     let res = {
         "words": [
         {
@@ -98,6 +98,12 @@ export default function Home() {
             pronunciation: `'rænsɪd`,
         },
     ]}
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredCards = res.words.filter((card) => {
+        return card.word.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+    })
     
     useEffect(() => {
         if (status === 'loading') {
@@ -112,9 +118,9 @@ export default function Home() {
 
     return (
         <div className="flex flex-col justify-start items-center">
-            <SearchBar/>
+            <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
             <div className="grid zeroWidth:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-                {res.words.map((word: any, index: number) => (
+                {filteredCards.map((word: any, index: number) => (
                     <div key={index} className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
                         <WordCard word={word}/> 
                     </div>
