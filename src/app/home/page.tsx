@@ -17,6 +17,7 @@ export default function Home() {
         "words": [
         {
             word: 'Diminutive',
+            id: 1,
             results: [
                 {
                     definition: 'very small',
@@ -32,6 +33,7 @@ export default function Home() {
         },
         {
             word: 'Nugatory',
+            id: 2,
             results: [
                 {
                     definition: 'of no real value',
@@ -43,6 +45,7 @@ export default function Home() {
         },
         {
             word: 'Rancid',
+            id: 3,
             results: [
                 {
                     definition: 'smelling of fermentation or staleness',
@@ -58,6 +61,7 @@ export default function Home() {
         },
         {
             word: 'Diminutive',
+            id: 4,
             results: [
                 {
                     definition: 'very small',
@@ -73,6 +77,7 @@ export default function Home() {
         },
         {
             word: 'Nugatory',
+            id: 5,
             results: [
                 {
                     definition: 'of no real value',
@@ -84,6 +89,7 @@ export default function Home() {
         },
         {
             word: 'Rancid',
+            id: 6,
             results: [
                 {
                     definition: 'smelling of fermentation or staleness',
@@ -100,10 +106,16 @@ export default function Home() {
     ]}
 
     const [searchQuery, setSearchQuery] = useState('');
+    const [words, setWords] = useState(res.words)
 
-    const filteredCards = res.words.filter((card) => {
+    const filteredCards = words.filter((card) => {
         return card.word.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
     })
+
+    const onDelete = (id:number) => {
+        const updatedWords = words.filter((word) => word.id !== id);
+        setWords(updatedWords);
+    }
     
     useEffect(() => {
         if (status === 'loading') {
@@ -122,7 +134,7 @@ export default function Home() {
             <div className="grid zeroWidth:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                 {filteredCards.map((word: any, index: number) => (
                     <div key={index} className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
-                        <WordCard word={word}/> 
+                        <WordCard word={word} onDelete={() => onDelete(word.id)}/> 
                     </div>
                 ))}
                 <div className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">

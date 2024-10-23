@@ -7,9 +7,10 @@ import ArrowForward from "@mui/icons-material/ArrowForward";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
+import { Word } from "../types/word";
 
 
-export default function WordCard({className = '', word}: WordCardProps) {
+export default function WordCard({className = '', word, onDelete}: WordCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isFlipping, setIsFlipping] = useState(false);
     const [displayText, setDisplayText] = useState(false);
@@ -32,11 +33,6 @@ export default function WordCard({className = '', word}: WordCardProps) {
         }, 400);
     };
 
-    const handleDelete = (event: Event) => {
-        event.stopPropagation();
-        console.log('handle delete')
-    }
-
     const handleNextDefinition = (event: Event) => {
         event.stopPropagation();
         if (currentIndex + 1 < word.results.length) {
@@ -50,6 +46,11 @@ export default function WordCard({className = '', word}: WordCardProps) {
             setDisplayedDefinition(word.results[currentIndex-1])
             setCurrentIndex(currentIndex-1)
         }
+    }
+
+    const handleDelete = (event: Event) => {
+        event?.stopPropagation();
+        onDelete()
     }
 
 
