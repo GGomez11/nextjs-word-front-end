@@ -49,3 +49,6 @@ body {
 .word-card:hover .arrows {
   opacity: 1;
 }
+.parent-capitalize {
+  text-transform: capitalize;
+}
