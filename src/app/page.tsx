@@ -15,11 +15,12 @@ export default function Home() {
 
   let word =  {
     word: 'Diminutive',
+    id: 1,
     results: [
         {
             definition: 'very small',
             partOfSpeech: 'adjective',
-            synonym: ['bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'],
+            synonym: 'bantam, flyspeck, lilliputian, midget, petite, tiny',
         },
         {
             definition: 'a word that is formed with a suffix (such as -let or -kin) to indicate smallness',
@@ -55,6 +56,10 @@ export default function Home() {
     }
   }
 
+  const onDelete = (id:number) => {
+    
+}
+
   return (
     <div className="h-screen">
       {/* Mobile View */} 
@@ -64,7 +69,7 @@ export default function Home() {
           <p className="zeroWidth:hidden md:block lg:hidden md:min-h-28 md:text-3xl 2xl:text-6xl whitespace-pre" ref={storeDefinitionsMobile}> </p>
         </div>
         <div className="w-full flex justify-center ">
-          <WordCard word={word}></WordCard>
+          <WordCard word={word} onDelete={() => onDelete(word.id)}></WordCard>
         </div>
         <div>
             <Button onClick={handleClick} type="submit" variant="contained" className="capitalize" size="large">
@@ -88,7 +93,7 @@ export default function Home() {
           </div>
         </div>
         <div className="basis-2/5 flex flex-col justify-center content-center">
-          <WordCard word={word}></WordCard>
+          <WordCard word={word} onDelete={() => onDelete(word.id)}></WordCard>
         </div>
       </div>
     </div>
