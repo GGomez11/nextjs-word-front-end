@@ -86,7 +86,7 @@ export default function Home() {
           <div className="text-4xl basis-3/5">
             <p className="whitespace-pre md:min-h-40" ref={storeDefinitionsDesktop}></p>
             <div className="mt-7">
-              <Button onClick={handleClick} type="submit" variant="contained" className="capitalize w-40 h-14" size="large">
+              <Button onClick={handleClick} type="submit" variant="contained" className="parent-capitalize w-40 h-14" size="large">
                 Get Started 
               </Button>
             </div>
