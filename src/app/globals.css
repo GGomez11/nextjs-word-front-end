@@ -37,21 +37,20 @@ body {
   transform: rotateY(180deg);
 }
 
-.word-card {
-}
-
 .arrows {
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease !important;
   display: flex;
 }
 
 .word-card:hover .arrows {
   opacity: 1;
 }
+
 .parent-capitalize {
   text-transform: capitalize !important;
 }
+
 .button-absolute {
   position: absolute !important;
 }
