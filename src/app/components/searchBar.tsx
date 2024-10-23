@@ -5,7 +5,7 @@ import { SearchBarProps } from '../types/searchBarProps';
 
 export default function SearchBar({searchQuery, setSearchQuery}: SearchBarProps) {
     
-    const handleSearch = (e: Event) => {
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value)
     };
     

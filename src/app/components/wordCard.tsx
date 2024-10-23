@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
 import { Word } from "../types/word";
+import type { MouseEvent } from 'react';
 
 
 export default function WordCard({className = '', word, onDelete}: WordCardProps) {
@@ -33,14 +34,14 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
         }, 400);
     };
 
-    const handleNextDefinition = (event: Event) => {
+    const handleNextDefinition = (event: MouseEvent) => {
         event.stopPropagation();
         if (currentIndex + 1 < word.results.length) {
             setDisplayedDefinition(word.results[currentIndex+1])
             setCurrentIndex(currentIndex+1)        
         }
     }
-    const handlePreviousDefinition = (event: Event) => {
+    const handlePreviousDefinition = (event: MouseEvent) => {
         event.stopPropagation();
         if (currentIndex - 1 >= 0) {
             setDisplayedDefinition(word.results[currentIndex-1])
@@ -48,9 +49,9 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
         }
     }
 
-    const handleDelete = (event: Event) => {
+    const handleDelete = (event: MouseEvent) => {
         event?.stopPropagation();
-        onDelete()
+        onDelete(word.id)
     }
 
 
