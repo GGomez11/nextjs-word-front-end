@@ -94,7 +94,7 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                 {displayText && 
                 <div className="flex flex-col h-full">
                     <p className="text-black zeroWidth:text-base sm:text-xl basis-2/4">Pronunciation: {word.pronunciation}</p>
-                    <p className="text-black zeroWidth:text-base sm:text-xl basis-2/4">Synonym: 'bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'</p>
+                    <p className="text-black zeroWidth:text-base sm:text-xl basis-2/4">Synonym: bantam, flyspeck, lilliputian, midget, petite, tiny</p>
                 </div>
                 } 
             </div> 
