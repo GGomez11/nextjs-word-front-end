@@ -3,13 +3,11 @@
 import WordCard from "./components/wordCard";
 import Button from '@mui/material/Button';
 import { useEffect, useRef } from "react";
-import Typed from 'typed.js';
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import { ReactTyped } from "react-typed";
 
 export default function Home() {
-  const storeDefinitionsMobile = useRef(null);
-  const storeDefinitionsDesktop = useRef(null);
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -31,21 +29,7 @@ export default function Home() {
 };
 
   useEffect(() => {
-    const typed = new Typed(storeDefinitionsMobile.current, {
-      strings: ['Store definitions.\nLearn pronunciations.\nFind synonyms.'],
-      typeSpeed: 50,
-      showCursor: false
-    });
 
-    const typed1 = new Typed(storeDefinitionsDesktop.current, {
-      strings: ['Store definitions.\nLearn pronunciations.\nFind synonyms.'],
-      typeSpeed: 50,
-      showCursor: false
-    });
-
-    return () => {
-      typed.destroy();
-    }
   }, [status, router])
 
   const handleClick = () => {
@@ -66,7 +50,9 @@ export default function Home() {
       <div className="h-screen zeroWidth:flex flex-col justify-evenly items-center lg:hidden">
         <div className="zeroWidth:flex flex-col justify-center md:items-start items-center xs:px-4 sm:px-9 lg:px-20 lg:hidden">
           <p className="text-2xl xs:text-3xl sm:text-5xl 2xl:text-7xl mb-1">New Words at your fingertips.</p>
-          <p className="zeroWidth:hidden md:block lg:hidden md:min-h-28 md:text-3xl 2xl:text-6xl whitespace-pre" ref={storeDefinitionsMobile}> </p>
+          <p className="zeroWidth:hidden md:block lg:hidden md:min-h-28 md:text-3xl 2xl:text-6xl whitespace-pre">
+            <ReactTyped strings={["Store definitions.\nLearn pronunciations.\nFind synonyms."]} typeSpeed={45} />
+           </p>
         </div>
         <div className="w-full flex justify-center ">
           <WordCard word={word} onDelete={() => onDelete(word.id)}></WordCard>
@@ -84,7 +70,9 @@ export default function Home() {
             <p className="text-7xl">New Words at your fingertips.</p>
           </div>
           <div className="text-4xl basis-3/5">
-            <p className="whitespace-pre md:min-h-40" ref={storeDefinitionsDesktop}></p>
+            <p className="whitespace-pre md:min-h-40">
+              <ReactTyped strings={["Store definitions.\nLearn pronunciations.\nFind synonyms."]} typeSpeed={45} />
+            </p>
             <div className="mt-7">
               <Button onClick={handleClick} type="submit" variant="contained" className="parent-capitalize w-40 h-14" size="large">
                 Get Started 
