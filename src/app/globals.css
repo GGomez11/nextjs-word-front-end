@@ -50,5 +50,5 @@ body {
   opacity: 1;
 }
 .parent-capitalize {
-  text-transform: capitalize;
+  text-transform: capitalize !important;
 }
