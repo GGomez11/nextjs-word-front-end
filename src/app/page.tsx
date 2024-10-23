@@ -2,15 +2,14 @@
 
 import WordCard from "./components/wordCard";
 import Button from '@mui/material/Button';
-import React from 'react';
+import { useEffect, useRef } from "react";
 import Typed from 'typed.js';
-import { doSocialLogin } from "./actions";
-import { useSession } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const storeDefinitionsMobile = React.useRef(null);
-  const storeDefinitionsDesktop = React.useRef(null);
+  const storeDefinitionsMobile = useRef(null);
+  const storeDefinitionsDesktop = useRef(null);
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -30,7 +29,7 @@ export default function Home() {
     pronunciation: `dɪ'mɪnjətɪv`,
 };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const typed = new Typed(storeDefinitionsMobile.current, {
       strings: ['Store definitions.\nLearn pronunciations.\nFind synonyms.'],
       typeSpeed: 50,
@@ -46,13 +45,13 @@ export default function Home() {
     return () => {
       typed.destroy();
     }
-  })
+  }, [status, router])
 
   const handleClick = () => {
-    if (session?.user) {
+    if (session) {
       router.push('/home')
     } else {
-      doSocialLogin()
+      signIn('google', {callbackUrl: '/home'});
     }
   }
 

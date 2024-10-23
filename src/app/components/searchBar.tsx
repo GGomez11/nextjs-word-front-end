@@ -1,16 +1,12 @@
 'use client'
 
 import { useState } from 'react';
+import { SearchBarProps } from '../types/searchBarProps';
 
-export default function SearchBar() {
-    const [query, setQuery] = useState('');
-
-    const handleSearch = (e) => {
-        // e.preventDefault();
-        // if (onSearch) {
-        // onSearch(query);
-        // }
-        setQuery(''); // Clear the input after search
+export default function SearchBar({searchQuery, setSearchQuery}: SearchBarProps) {
+    
+    const handleSearch = (e: Event) => {
+        setSearchQuery(e.target.value)
     };
     
     return (
@@ -18,17 +14,11 @@ export default function SearchBar() {
             <form className='zeroWidth:w-3/4 md:w-'>
                 <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    value={searchQuery}
+                    onChange={handleSearch}
                     placeholder="Search your word library"
                     className="p-2 border w-full text-black bg-greyAccent border-gray-300 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-            {/* <button
-                type="submit"
-                className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-                Search
-            </button>    */}
             </form>
         </div>
     )
