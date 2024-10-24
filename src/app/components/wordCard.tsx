@@ -7,7 +7,6 @@ import ArrowForward from "@mui/icons-material/ArrowForward";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
-import { Word } from "../types/word";
 import type { MouseEvent } from 'react';
 
 
