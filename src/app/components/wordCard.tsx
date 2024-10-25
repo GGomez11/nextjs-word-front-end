@@ -64,12 +64,12 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                     <div>
                         <span className="absolute zeroWidth:-left-2 xl:left-0 zeroWidth:top-2 xl:top-1">{currentIndex+1}/{word.results.length}</span>
                         <Tooltip title="Remove word">
-                        <IconButton onClick={handleDelete} size="small" className="button-absolute zeroWidth:-right-2 xl:right-0 zeroWidth:top-2 xl:top-1 flex"> 
-                            <DeleteIcon fontSize="inherit"/>
-                        </IconButton>
+                            <IconButton onClick={handleDelete} size="small" className="button-absolute zeroWidth:-right-2 xl:-right-2 zeroWidth:top-2 xl:top-1 flex"> 
+                                <DeleteIcon fontSize="inherit"/>
+                            </IconButton>
                         </Tooltip>
                         <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>
-                        <span className="absolute bottom-0 right-0">({displayedDefinition.partOfSpeech})</span>
+                        <span className="absolute zeroWidth:bottom-1 xl:bottom-0 zeroWidth:right-0">({displayedDefinition.partOfSpeech})</span>
                     </div>
                     <hr className="my-2 border-t-1 border-black w-full hidden xl:block" />
                     {/* Body of card */}
@@ -90,11 +90,11 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                 </>
                 }
             </div>
-            <div className={`w-full h-full bg-white flex justify-center items-end rounded-lg rotate-y-180 ${isFlipped ? '' : 'hidden'}`}>
+            <div className={`w-full h-full bg-white flex justify-center items-end rounded-lg rotate-y-180 md:p-2 ${isFlipped ? '' : 'hidden'}`}>
                 {displayText && 
                 <div className="flex flex-col h-full">
-                    <p className="text-black zeroWidth:text-base sm:text-xl basis-2/4">Pronunciation: {word.pronunciation}</p>
-                    <p className="text-black zeroWidth:text-base sm:text-xl basis-2/4">Synonym: bantam, flyspeck, lilliputian, midget, petite, tiny</p>
+                    <p className="text-black zeroWidth:text-base basis-2/4">Pronunciation: {word.pronunciation}</p>
+                    <p className="text-black zeroWidth:text-base basis-2/4">Synonym: bantam, flyspeck, lilliputian, midget, petite, tiny</p>
                 </div>
                 } 
             </div> 
