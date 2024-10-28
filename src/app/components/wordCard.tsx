@@ -50,7 +50,7 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
 
     const handleDelete = (event: MouseEvent) => {
         event?.stopPropagation();
-        onDelete(word.id)
+        onDelete(word.word)
     }
 
 

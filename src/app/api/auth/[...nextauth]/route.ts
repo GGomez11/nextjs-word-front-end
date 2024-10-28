@@ -19,7 +19,7 @@ const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, account }) {
-      // If the user just logged in, get the id_token from the account
+      // Get id token
       if (account) {
         token.idToken = account.id_token; // Add id_token to the token object
       }
