@@ -6,15 +6,13 @@ import EmptyWordCard from "../components/emptyWordCard";
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { Word } from "../types/word"
-import { auth } from '../lib/firebase-config';
 import { authenticatedFetch } from '../utils/doFetch';
-import {onAuthStateChanged, User} from 'firebase/auth';
 import { useAuth } from '../utils/AuthContext';
 
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState<Word[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
   const { user, loading } = useAuth();
@@ -25,6 +23,10 @@ export default function Home() {
   })
 
   async function onDelete(wordName: string) {
+    if (user === null) {
+      console.log('Delete error:')
+      return
+    }
     try {
       const response = await authenticatedFetch('/api/words/'+wordName, {
         method: 'DELETE',
@@ -40,6 +42,11 @@ export default function Home() {
   async function addWord(word: string) {
     if (words && words.length > 0 && words.some(word_in_list => word_in_list.word.toLowerCase() == word.toLowerCase())){
       alert('Words already exists in your vocabulary')
+      return
+    }
+
+    if (user === null) {
+      console.log('Delete error:')
       return
     }
     
@@ -60,6 +67,11 @@ export default function Home() {
   }
 
   async function fetchWords () {
+    if (user === null) {
+      console.log('Delete error:')
+      return
+    }
+    
     try {
       const response = await authenticatedFetch('/api/words/', undefined, user)
       const data = await response.json();

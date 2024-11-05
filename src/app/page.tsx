@@ -7,10 +7,26 @@ import { useRouter } from 'next/navigation';
 import { ReactTyped } from "react-typed";
 import { signInWithGoogle } from "./lib/firebase-config";
 import { useAuth } from "./utils/AuthContext";
+import { Word } from "./types/word";
 
 export default function Home() {
   const router = useRouter();
-  const [defaultWords, setDefaultWords] = useState()
+  const [defaultWords, setDefaultWords] = useState<Word>({
+    word: 'Diminutive',
+    id: 1,
+    results: [
+      {
+        definition: 'very small',
+        partOfSpeech: 'adjective',
+        synonym: 'bantam, flyspeck, lilliputian, midget, petite, tiny',
+      },
+      {
+        definition: 'a word that is formed with a suffix (such as -let or -kin) to indicate smallness',
+        partOfSpeech: 'noun',
+      },
+    ],
+    pronunciation: `dɪ'mɪnjətɪv`,
+  })
   const [isLoaded, setIsLoaded] = useState(false)
   const { user, loading } = useAuth();
 
@@ -52,7 +68,7 @@ export default function Home() {
           </p>
         </div>
         <div className="w-full flex justify-center ">
-          {isLoaded && <WordCard word={defaultWords} onDelete={() => onDelete(defaultWords.id)}></WordCard>}
+          {isLoaded && <WordCard word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
         <div>
           <Button onClick={handleSignIn} type="submit" variant="contained" className="capitalize" size="large">
@@ -78,7 +94,7 @@ export default function Home() {
           </div>
         </div>
         <div className="basis-2/5 flex flex-col justify-center content-center">
-          {isLoaded && <WordCard word={defaultWords} onDelete={() => onDelete(defaultWords.id)}></WordCard>}
+          {isLoaded && <WordCard word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
       </div>
     </div>
