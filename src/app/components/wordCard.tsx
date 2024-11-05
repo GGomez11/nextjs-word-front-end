@@ -69,12 +69,12 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                             </IconButton>
                         </Tooltip>
                         <h1 className="zeroWidth:text-xl md:text-2xl">{word.word}</h1>
-                        <span className="absolute zeroWidth:bottom-1 xl:bottom-0 zeroWidth:right-0">({displayedDefinition.partOfSpeech})</span>
+                        <span className="absolute zeroWidth:bottom-1 xl:bottom-0 zeroWidth:right-0">({displayedDefinition?.partOfSpeech})</span>
                     </div>
                     <hr className="my-2 border-t-1 border-black w-full hidden xl:block" />
                     {/* Body of card */}
-                    <div className="flex w-fit justify-center overflow">
-                        <p className="zeroWidth:text-base">{displayedDefinition.definition}</p>
+                    <div className="flex w-fit justify-center overflow-auto no-scrollbar mb-[24px]">
+                        <p className="zeroWidth:text-base">{displayedDefinition?.definition}</p>
                     </div>
                     </>)
                 }

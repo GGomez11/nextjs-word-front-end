@@ -21,23 +21,42 @@ export default function Home() {
 
 
   const filteredCards = words?.filter((card) => {
-    return card.word.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+    return card.word.toLocaleLowerCase().includes(searchQuery.toLowerCase())
   })
 
-  const onDelete = (wordName: string) => {
-    const updatedWords = words.filter((word) => word.word !== wordName);
-    setWords(updatedWords);
+  async function onDelete(wordName: string) {
+    try {
+      const response = await authenticatedFetch('/api/words/'+wordName, {
+        method: 'DELETE',
+      },
+      user)
+      const updatedWords = words.filter((word) => word.word !== wordName);
+      setWords(updatedWords);
+    } catch (error) {
+      console.log('Delete error:', error)
+    } 
   }
 
-  const onAdd = (word: string) => {
-    // Make api request
-
-    // If request was 200 status
-    // Add word to words list
-    // 
-    //setWords(prevWords => [...prevWords, newWord]);
-    // Else
-    // Word not found
+  async function addWord(word: string) {
+    if (words && words.length > 0 && words.some(word_in_list => word_in_list.word.toLowerCase() == word.toLowerCase())){
+      alert('Words already exists in your vocabulary')
+      return
+    }
+    
+    try {
+      const response = await authenticatedFetch('/api/words', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ word: word })
+      },
+        user)
+      const updatedWords = await response.json();
+      setWords(updatedWords.words)
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
   }
 
   async function fetchWords () {
@@ -75,7 +94,7 @@ export default function Home() {
           </div>
         ))}
         <div className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
-          <EmptyWordCard onAdd={onAdd} />
+          <EmptyWordCard onAdd={addWord} />
         </div>
       </div>
     </div>
