@@ -31,7 +31,7 @@ export default function Home() {
   const { user, loading } = useAuth();
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/words/homePage')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/words/homePage`)
       .then((res) => res.json())
       .then((data) => {
         setDefaultWords(data)
