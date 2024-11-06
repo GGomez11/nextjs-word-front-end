@@ -1,172 +1,114 @@
 'use client'
 
-import { redirect } from "next/navigation";
 import WordCard from "../components/wordCard";
 import SearchBar from "../components/searchBar";
 import EmptyWordCard from "../components/emptyWordCard";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
+import { Word } from "../types/word"
+import { authenticatedFetch } from '../utils/doFetch';
+import { useAuth } from '../utils/AuthContext';
 
-
-let res = {
-    "words": [
-    {
-        word: 'Diminutive',
-        id: 1,
-        results: [
-            {
-                definition: 'very small',
-                partOfSpeech: 'adjective',
-                synonym: ['bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'],
-            },
-            {
-                definition: 'a word that is formed with a suffix (such as -let or -kin) to indicate smallness',
-                partOfSpeech: 'noun'
-            }
-        ],
-        pronunciation: `dɪ'mɪnjətɪv`,
-    },
-    {
-        word: 'Nugatory',
-        id: 2,
-        results: [
-            {
-                definition: 'of no real value',
-                partOfSpeech: 'adjective',
-                synonym: ['worthless'],
-            },
-        ],
-        pronunciation: `'nuɡə,toʊri`,
-    },
-    {
-        word: 'Rancid',
-        id: 3,
-        results: [
-            {
-                definition: 'smelling of fermentation or staleness',
-                partOfSpeech: 'adjective',
-                synonym: ['sour'],
-            },
-            {
-                definition: '(used of decomposing oils or fats) having a rank smell or taste usually due to a chemical change or decomposition',
-                partOfSpeech: 'adjective',
-            }
-        ],
-        pronunciation: `'rænsɪd`,
-    },
-    {
-        word: 'Diminutive',
-        id: 4,
-        results: [
-            {
-                definition: 'very small',
-                partOfSpeech: 'adjective',
-                synonym: ['bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'],
-            },
-            {
-                definition: 'a word that is formed with a suffix (such as -let or -kin) to indicate smallness',
-                partOfSpeech: 'noun'
-            }
-        ],
-        pronunciation: `dɪ'mɪnjətɪv`,
-    },
-    {
-        word: 'Nugatory',
-        id: 5,
-        results: [
-            {
-                definition: 'of no real value',
-                partOfSpeech: 'adjective',
-                synonym: ['worthless'],
-            },
-        ],
-        pronunciation: `'nuɡə,toʊri`,
-    },
-    {
-        word: 'Rancid',
-        id: 6,
-        results: [
-            {
-                definition: 'smelling of fermentation or staleness',
-                partOfSpeech: 'adjective',
-                synonym: ['sour'],
-            },
-            {
-                definition: '(used of decomposing oils or fats) having a rank smell or taste usually due to a chemical change or decomposition',
-                partOfSpeech: 'adjective',
-            }
-        ],
-        pronunciation: `'rænsɪd`,
-    },
-]}
 
 export default function Home() {
-    const { data: session, status } = useSession();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [words, setWords] = useState(res.words)
-    const router = useRouter();
-    
-    const filteredCards = words.filter((card) => {
-        return card.word.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-    })
+  const [searchQuery, setSearchQuery] = useState('');
+  const [words, setWords] = useState<Word[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
+  const { user, loading } = useAuth();
 
-    const onDelete = (id: number) => {
-        const updatedWords = words.filter((word) => word.id !== id);
-        setWords(updatedWords);
+
+  const filteredCards = words?.filter((card) => {
+    return card.word.toLocaleLowerCase().includes(searchQuery.toLowerCase())
+  })
+
+  async function onDelete(wordName: string) {
+    if (user === null) {
+      console.log('Delete error:')
+      return
     }
-    
-    const onAdd = (word: string) => {
-        // Make api request
+    try {
+      const response = await authenticatedFetch('/api/words/'+wordName, {
+        method: 'DELETE',
+      },
+      user)
+      const updatedWords = words.filter((word) => word.word !== wordName);
+      setWords(updatedWords);
+    } catch (error) {
+      console.log('Delete error:', error)
+    } 
+  }
 
-        // If request was 200 status
-        // Add word to words list
-        // 
-        const newWord = {
-                word: word,
-                id: 11,
-                results: [
-                    {
-                        definition: 'very small',
-                        partOfSpeech: 'adjective',
-                        synonym: ['bantam', 'flyspeck', 'lilliputian', 'midget', 'petite', 'tiny'],
-                    },
-                    {
-                        definition: 'a word that is formed with a suffix (such as -let or -kin) to indicate smallness',
-                        partOfSpeech: 'noun'
-                    }
-                ],
-                pronunciation: `dɪ'mɪnjətɪv`,
-            }
-        setWords(prevWords => [...prevWords, newWord]);
-        // Else
-        // Word not found
+  async function addWord(word: string) {
+    if (words && words.length > 0 && words.some(word_in_list => word_in_list.word.toLowerCase() == word.toLowerCase())){
+      alert('Words already exists in your vocabulary')
+      return
     }
 
-    useEffect(() => {
-        if (status === 'loading') {
-          // Can load spinnger
-          return;
-        }
+    if (user === null) {
+      console.log('Delete error:')
+      return
+    }
     
-        if (status === 'unauthenticated') {
-          router.push('/')
-        }
-      }, [status, router]);
+    try {
+      const response = await authenticatedFetch('/api/words', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ word: word })
+      },
+        user)
+      const updatedWords = await response.json();
+      setWords(updatedWords.words)
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
 
-    return (
-        <div className="flex flex-col justify-start items-center">
-            <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-            <div className="grid zeroWidth:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-                {filteredCards.map((word: any, index: number) => (
-                    <div key={index} className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
-                        <WordCard word={word} onDelete={() => onDelete(word.id)}/> 
-                    </div>
-                ))}
-                <div className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
-                    <EmptyWordCard onAdd={onAdd}/>
-                </div>
-            </div>
+  async function fetchWords () {
+    if (user === null) {
+      console.log('Delete error:')
+      return
+    }
+    
+    try {
+      const response = await authenticatedFetch('/api/words/', undefined, user)
+      const data = await response.json();
+      setWords(data.words);
+      setIsLoaded(true);
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      fetchWords()
+    }
+  }, [user]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Please sign in to view this content</div>;
+  }
+
+  return (
+    <div className="flex flex-col justify-start items-center">
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <div className="grid zeroWidth:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+        {filteredCards?.map((word: any, index: number) => (
+          <div key={index} className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
+            <WordCard word={word} onDelete={() => onDelete(word.word)} />
+          </div>
+        ))}
+        <div className="p-5 zeroWidth:min-w-[350px] sm:min-w-[400px] md:min-w-[400px] xl:min-w-[350px] flex flex-row justify-center w-full">
+          <EmptyWordCard onAdd={addWord} />
         </div>
-    )
+      </div>
+    </div>
+  )
 }

@@ -50,7 +50,7 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
 
     const handleDelete = (event: MouseEvent) => {
         event?.stopPropagation();
-        onDelete(word.id)
+        onDelete(word.word)
     }
 
 
@@ -68,13 +68,13 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                                 <DeleteIcon fontSize="inherit"/>
                             </IconButton>
                         </Tooltip>
-                        <h1 className="text-xl zeroWidth:text-base sm:text-xl md:text-2xl">{word.word}</h1>
-                        <span className="absolute zeroWidth:bottom-1 xl:bottom-0 zeroWidth:right-0">({displayedDefinition.partOfSpeech})</span>
+                        <h1 className="zeroWidth:text-xl md:text-2xl">{word.word}</h1>
+                        <span className="absolute zeroWidth:bottom-1 xl:bottom-0 zeroWidth:right-0">({displayedDefinition?.partOfSpeech})</span>
                     </div>
                     <hr className="my-2 border-t-1 border-black w-full hidden xl:block" />
                     {/* Body of card */}
-                    <div className="flex w-fit justify-center overflow">
-                        <p className="zeroWidth:text-base">{displayedDefinition.definition}</p>
+                    <div className="flex w-fit justify-center overflow-auto no-scrollbar mb-[24px]">
+                        <p className="zeroWidth:text-base">{displayedDefinition?.definition}</p>
                     </div>
                     </>)
                 }
@@ -90,7 +90,8 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                 </>
                 }
             </div>
-            <div className={`w-full h-full bg-white flex justify-center items-end rounded-lg rotate-y-180 md:p-2 ${isFlipped ? '' : 'hidden'}`}>
+            {/* Back of card */}
+            <div className={`w-full h-full bg-white flex justify-center items-end rounded-lg rotate-y-180 zeroWidth:p-2 ${isFlipped ? '' : 'hidden'}`}>
                 {displayText && 
                 <div className="flex flex-col h-full">
                     <p className="text-black zeroWidth:text-base basis-2/4">Pronunciation: {word.pronunciation}</p>

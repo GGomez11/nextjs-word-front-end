@@ -6,9 +6,9 @@ export default function WordCard({onAdd}: EmptyWordCardProps) {
     const [newWord, setNewWord] = useState('')
 
     const handleAdd = () => {
-        if (newWord.trim()) { // Check if the input is not just whitespace
-          onAdd(newWord.toLowerCase());
-          setNewWord(''); // Clear the input after adding
+        if (newWord.trim()) { 
+          onAdd(newWord.toLowerCase())
+          setNewWord('')
         }
       };
     
