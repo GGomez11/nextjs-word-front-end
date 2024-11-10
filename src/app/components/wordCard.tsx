@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import IconButton from '@mui/material/IconButton';
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import DeleteIcon from '@mui/icons-material/Delete';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
 import type { MouseEvent } from 'react';
@@ -16,6 +17,7 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
     const [displayText, setDisplayText] = useState(false);
     const [displayedDefinition, setDisplayedDefinition] = useState(word.results[0])
     const [currentIndex, setCurrentIndex] = useState(0);
+    const audioRef = useRef(new Audio(word.pronunciation?.audioURL));
 
     let counter = 0
     setInterval(() => {
@@ -53,6 +55,10 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
         onDelete(word.word)
     }
 
+    const togglePlay = (event: MouseEvent) => {
+        event.stopPropagation();
+        audioRef.current.play();
+    }
 
     return (
         <div onClick={handleFlip} className={`${className} word-card flex zeroWidth:w-96 xl:w-[290px] text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-52 lg:h-44 xl:h-[350px] xl:p-3
@@ -94,7 +100,12 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
             <div className={`w-full h-full bg-white flex justify-center items-end rounded-lg rotate-y-180 zeroWidth:p-2 ${isFlipped ? '' : 'hidden'}`}>
                 {displayText && 
                 <div className="flex flex-col h-full">
-                    <p className="text-black zeroWidth:text-base basis-2/4">Pronunciation: {word.pronunciation}</p>
+                    <div className="text-black zeroWidth:text-base basis-2/4">
+                        <span>Pronunciation: {word.pronunciation?.written}</span>
+                        <IconButton onClick={togglePlay}>
+                            <VolumeUpIcon></VolumeUpIcon>
+                        </IconButton>
+                    </div>
                     <p className="text-black zeroWidth:text-base basis-2/4">Synonym: bantam, flyspeck, lilliputian, midget, petite, tiny</p>
                 </div>
                 } 
