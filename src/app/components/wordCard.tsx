@@ -9,6 +9,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
 import type { MouseEvent } from 'react';
+import DOMPurify from 'dompurify';
 
 
 export default function WordCard({className = '', word, onDelete}: WordCardProps) {
@@ -106,7 +107,14 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                             <VolumeUpIcon></VolumeUpIcon>
                         </IconButton>
                     </div>
-                    <p className="text-black zeroWidth:text-base basis-2/4">Synonym: bantam, flyspeck, lilliputian, midget, petite, tiny</p>
+                    <div>
+                    {displayedDefinition.synonym?.map((item, index) => (
+                        <div className="text-black zeroWidth:text-base basis-2/4">
+                            {index == 0 && <p dangerouslySetInnerHTML={{ __html: "Synonym(s): " + DOMPurify.sanitize(item) }}></p>}
+                            {index != 0 && <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }}></p>}
+                        </div>
+                    ))}
+                    </div>
                 </div>
                 } 
             </div> 
