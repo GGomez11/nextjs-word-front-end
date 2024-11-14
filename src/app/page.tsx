@@ -12,20 +12,29 @@ import { Word } from "./types/word";
 export default function Home() {
   const router = useRouter();
   const [defaultWords, setDefaultWords] = useState<Word>({
-    word: 'Diminutive',
+    word: 'diligent',
     id: 1,
     results: [
       {
         definition: 'very small',
         partOfSpeech: 'adjective',
-        synonym: 'bantam, flyspeck, lilliputian, midget, petite, tiny',
+        synonym: [
+          "<strong>busy</strong> <strong>industrious</strong> <strong>diligent</strong> <strong>assiduous</strong> <strong>sedulous</strong> mean actively engaged or occupied. <strong>busy</strong> chiefly stresses activity as opposed to idleness or leisure. ",
+          " <strong>industrious</strong> implies characteristic or habitual devotion to work. ",
+          " <strong>diligent</strong> suggests earnest application to some specific object or pursuit. ",
+          " <strong>assiduous</strong> stresses careful and unremitting application. ",
+          " <strong>sedulous</strong> implies painstaking and persevering application. "
+        ]
       },
       {
         definition: 'a word that is formed with a suffix (such as -let or -kin) to indicate smallness',
         partOfSpeech: 'noun',
       },
     ],
-    pronunciation: `dɪ'mɪnjətɪv`,
+    pronunciation: {
+      written: `'di-lə-jənt`,
+      audioURL: 'https://media.merriam-webster.com/audio/prons/en/us/mp3/d/dilige04.mp3'
+    }
   })
   const [isLoaded, setIsLoaded] = useState(false)
   const { user, loading } = useAuth();
@@ -93,7 +102,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="basis-2/5 flex flex-col justify-center content-center">
+        <div className="basis-2/5 flex justify-center items-center content-center">
           {isLoaded && <WordCard word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
       </div>
