@@ -46,7 +46,6 @@ export default function Home() {
     }
 
     if (user === null) {
-      console.log('Delete error:')
       return
     }
     
@@ -59,6 +58,10 @@ export default function Home() {
         body: JSON.stringify({ word: word })
       },
         user)
+      if (!response.ok) {
+        alert('Failed to add word.')
+        return
+      }
       const updatedWords = await response.json();
       setWords(updatedWords.words)
     } catch (error) {
