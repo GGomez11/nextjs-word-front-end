@@ -107,9 +107,9 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                             <VolumeUpIcon></VolumeUpIcon>
                         </IconButton>
                     </div>
-                    <div>
+                    <div className="overflow-auto no-scrollbar">
                     {displayedDefinition.synonym?.map((item, index) => (
-                        <div className="text-black zeroWidth:text-base basis-2/4">
+                        <div className="text-black zeroWidth:text-base basis-2/4 ">
                             {index == 0 && <p dangerouslySetInnerHTML={{ __html: "Synonym(s): " + DOMPurify.sanitize(item) }}></p>}
                             {index != 0 && <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }}></p>}
                         </div>
