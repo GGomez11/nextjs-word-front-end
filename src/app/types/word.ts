@@ -3,8 +3,11 @@ export interface Word {
     id: number;
     results: {
         definition: string;
-        synonym?: string;
+        synonym?: string[];
         partOfSpeech: string;
     }[];
-    pronunciation?: string;
+    pronunciation?: {
+        written: string;
+        audioURL: string;
+    }
 }
