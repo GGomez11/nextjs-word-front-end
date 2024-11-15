@@ -1,6 +1,17 @@
 ## Words Front End
 This is the Next.js application for my Word personal project. I created this to help improve my vocabulary and web application skills.
 
+
+## Before
+One thing I wanted to do was refresh the UI. So here is the old one for comparison. 
+</br>
+<img src="images/Landing%20Page.png" width=800 height=400px/>
+<img src="images/App%20Page.png" width=800 height=400px/>
+
+## Today
+<img src="images/Landing Page After.png" width=800 height=400px/>
+<img src="images/App Page After.png" width=800/ height=400px>
+
 ## Getting Started
 
 First, run the development server:
