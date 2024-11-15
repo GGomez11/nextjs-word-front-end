@@ -16,7 +16,7 @@ export default function SearchBar({searchQuery, setSearchQuery}: SearchBarProps)
                     type="text"
                     value={searchQuery}
                     onChange={handleSearch}
-                    placeholder="Search your word library"
+                    placeholder="Search your vocabulary."
                     className="p-2 border w-full text-black bg-greyAccent border-gray-300 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </form>
