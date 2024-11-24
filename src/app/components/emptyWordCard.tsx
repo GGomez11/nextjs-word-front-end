@@ -21,7 +21,7 @@ export default function WordCard({onAdd}: EmptyWordCardProps) {
             handleAdd()
         }
     }
-    const handleOnSearch = (event: MouseEvent) => {
+    const handleOnSearch = () => {
         handleAdd()
     }
 
