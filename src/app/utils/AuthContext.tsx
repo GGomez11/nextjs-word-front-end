@@ -25,12 +25,6 @@ export function AuthContextProvider({
     console.log('Setting up auth state listener');
     
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log('Auth state changed:', {
-        userExists: !!user,
-        userEmail: user?.email,
-        userUID: user?.uid,
-        authCurrentUser: auth.currentUser?.email
-      });
       
       setUser(user);
       setLoading(false);
