@@ -11,7 +11,7 @@ import { Word } from "./types/word";
 
 export default function Home() {
   const router = useRouter();
-  const [defaultWords, setDefaultWords] = useState<Word>({
+  const [defaultWord, setDefaultWord] = useState<Word>({
     word: 'diligent',
     id: 1,
     results: [
@@ -43,7 +43,7 @@ export default function Home() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/words/homePage`)
       .then((res) => res.json())
       .then((data) => {
-        setDefaultWords(data)
+        setDefaultWord(data)
         setIsLoaded(true)
       })
       .catch((error) => {
@@ -71,13 +71,13 @@ export default function Home() {
       {/* Mobile View */}
       <div className="h-screen zeroWidth:flex flex-col justify-evenly items-center lg:hidden">
         <div className="zeroWidth:flex flex-col justify-center md:items-start items-center xs:px-4 sm:px-9 lg:px-20 lg:hidden">
-          <p className="text-2xl xs:text-3xl sm:text-5xl 2xl:text-7xl mb-1">New Words at Your Fingertips.</p>
+          <p className="text-center text-2xl xs:text-3xl sm:text-5xl 2xl:text-7xl mb-1">New Words at Your Fingertips.</p>
           <p className="zeroWidth:hidden md:block lg:hidden md:min-h-28 md:text-3xl 2xl:text-6xl whitespace-pre">
             <ReactTyped strings={["Store definitions.\nLearn pronunciations.\nDiscover synonyms."]} typeSpeed={45} />
           </p>
         </div>
         <div className="w-full flex justify-center ">
-          {isLoaded && <WordCard word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
+          {isLoaded && <WordCard showTouchIcon={true} word={defaultWord} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
         <div>
           <Button onClick={handleSignIn} type="submit" variant="contained" className="capitalize" size="large">
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
         </div>
         <div className="basis-2/5 flex justify-center items-center content-center">
-          {isLoaded && <WordCard word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
+          {isLoaded && <WordCard showTouchIcon={true} word={defaultWord} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
       </div>
     </div>

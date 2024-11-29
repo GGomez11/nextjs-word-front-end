@@ -6,13 +6,14 @@ import ArrowBack from "@mui/icons-material/ArrowBack";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import DeleteIcon from '@mui/icons-material/Delete';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import TouchAppIcon from '@mui/icons-material/TouchApp';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
 import type { MouseEvent } from 'react';
 import DOMPurify from 'dompurify';
 
 
-export default function WordCard({className = '', word, onDelete}: WordCardProps) {
+export default function WordCard({showTouchIcon, word, onDelete}: WordCardProps) {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isFlipping, setIsFlipping] = useState(false);
     const [displayText, setDisplayText] = useState(false);
@@ -62,9 +63,16 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
     }
 
     return (
-        <div onClick={handleFlip} className={`${className} word-card flex zeroWidth:w-96 xl:w-[290px] text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-52 lg:h-44 xl:h-[350px] xl:p-3
+        <div onClick={handleFlip} className={`word-card flex zeroWidth:w-96 xl:w-[290px] text-black flex-col bg-white px-4 rounded-lg w-full zeroWidth:h-44 md:h-52 lg:h-44 xl:h-[350px] xl:p-3
        shadow-sm cursor-pointer transition-transform duration-1000 delay-1500 ${isFlipped ? 'rotate-y-180' : ''}`}>
             <div className={`relative flex flex-col justify-evenly xl:justify-start w-full w-full h-full bg-white items-center rounded-lg  ${isFlipped ? 'hidden' : ''}`}>
+                {showTouchIcon && !displayText &&
+                    <Tooltip title="Flip card">
+                        <IconButton size="small" className="button-absolute zeroWidth:top-2/3 xl:top-2/4 flex pulse"> 
+                            <TouchAppIcon/>
+                        </IconButton>
+                    </Tooltip>
+                }
                 {!displayText && (
                     <>
                     {/* Header */}
