@@ -11,7 +11,7 @@ import { Word } from "./types/word";
 
 export default function Home() {
   const router = useRouter();
-  const [defaultWords, setDefaultWords] = useState<Word>({
+  const [defaultWord, setDefaultWord] = useState<Word>({
     word: 'diligent',
     id: 1,
     results: [
@@ -43,7 +43,7 @@ export default function Home() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/words/homePage`)
       .then((res) => res.json())
       .then((data) => {
-        setDefaultWords(data)
+        setDefaultWord(data)
         setIsLoaded(true)
       })
       .catch((error) => {
@@ -77,7 +77,7 @@ export default function Home() {
           </p>
         </div>
         <div className="w-full flex justify-center ">
-          {isLoaded && <WordCard showTouchIcon={true} word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
+          {isLoaded && <WordCard showTouchIcon={true} word={defaultWord} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
         <div>
           <Button onClick={handleSignIn} type="submit" variant="contained" className="capitalize" size="large">
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
         </div>
         <div className="basis-2/5 flex justify-center items-center content-center">
-          {isLoaded && <WordCard showTouchIcon={true} word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
+          {isLoaded && <WordCard showTouchIcon={true} word={defaultWord} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
       </div>
     </div>
