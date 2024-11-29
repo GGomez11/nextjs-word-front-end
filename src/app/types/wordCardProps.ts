@@ -1,7 +1,7 @@
 import { Word } from "./word";
 
 export interface WordCardProps {
-    className?: string;
+    showTouchIcon?: boolean;
     word: Word;
     onDelete: (word: string) => void;
 }

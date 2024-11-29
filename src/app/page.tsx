@@ -77,7 +77,7 @@ export default function Home() {
           </p>
         </div>
         <div className="w-full flex justify-center ">
-          {isLoaded && <WordCard word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
+          {isLoaded && <WordCard showTouchIcon={true} word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
         <div>
           <Button onClick={handleSignIn} type="submit" variant="contained" className="capitalize" size="large">
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
         </div>
         <div className="basis-2/5 flex justify-center items-center content-center">
-          {isLoaded && <WordCard word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
+          {isLoaded && <WordCard showTouchIcon={true} word={defaultWords} onDelete={() => alert('Cannot delete default word!')}></WordCard>}
         </div>
       </div>
     </div>
