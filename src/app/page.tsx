@@ -71,7 +71,7 @@ export default function Home() {
       {/* Mobile View */}
       <div className="h-screen zeroWidth:flex flex-col justify-evenly items-center lg:hidden">
         <div className="zeroWidth:flex flex-col justify-center md:items-start items-center xs:px-4 sm:px-9 lg:px-20 lg:hidden">
-          <p className="text-2xl xs:text-3xl sm:text-5xl 2xl:text-7xl mb-1">New Words at Your Fingertips.</p>
+          <p className="text-center text-2xl xs:text-3xl sm:text-5xl 2xl:text-7xl mb-1">New Words at Your Fingertips.</p>
           <p className="zeroWidth:hidden md:block lg:hidden md:min-h-28 md:text-3xl 2xl:text-6xl whitespace-pre">
             <ReactTyped strings={["Store definitions.\nLearn pronunciations.\nDiscover synonyms."]} typeSpeed={45} />
           </p>
