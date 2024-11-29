@@ -6,6 +6,7 @@ import ArrowBack from "@mui/icons-material/ArrowBack";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import DeleteIcon from '@mui/icons-material/Delete';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import TouchAppIcon from '@mui/icons-material/TouchApp';
 import Tooltip from '@mui/material/Tooltip';
 import { WordCardProps } from "../types/wordCardProps";
 import type { MouseEvent } from 'react';
@@ -80,6 +81,11 @@ export default function WordCard({className = '', word, onDelete}: WordCardProps
                     </div>
                     <hr className="my-2 border-t-1 border-black w-full hidden xl:block" />
                     {/* Body of card */}
+                    <Tooltip title="Flip card">
+                        <IconButton size="small" className="button-absolute zeroWidth:top-2/3 xl:top-2/4 flex pulse"> 
+                            <TouchAppIcon/>
+                        </IconButton>
+                        </Tooltip>
                     <div className="flex w-fit justify-center overflow-auto no-scrollbar mb-[24px]">
                         <p className="zeroWidth:text-base">{displayedDefinition?.definition}</p>
                     </div>
