@@ -10,7 +10,6 @@ import TouchAppIcon from "@mui/icons-material/TouchApp";
 import Tooltip from "@mui/material/Tooltip";
 import { WordCardProps } from "../types/wordCardProps";
 import type { MouseEvent } from "react";
-import DOMPurify from "dompurify";
 import { useFlipCard } from "../hooks/useFlipCard";
 
 export default function WordCard({
@@ -138,20 +137,8 @@ export default function WordCard({
                   className="text-black zeroWidth:text-base basis-2/4 "
                   key={index}
                 >
-                  {index == 0 && (
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: "Synonym(s): " + DOMPurify.sanitize(item),
-                      }}
-                    ></p>
-                  )}
-                  {index != 0 && (
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(item),
-                      }}
-                    ></p>
-                  )}
+                  {index == 0 && <p>Synonym(s): {item}</p>}
+                  {index != 0 && <p>{item}</p>}
                 </div>
               ))}
             </div>
