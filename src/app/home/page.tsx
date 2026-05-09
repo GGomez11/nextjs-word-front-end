@@ -16,11 +16,13 @@ export default function Home() {
   const router = useRouter();
   const { user, loading } = useAuth();
 
-  const filteredCards = useMemo(() => {
-    words?.filter((card) => {
-      card.word.toLocaleLowerCase().includes(searchQuery.toLowerCase());
-    });
-  }, [words, searchQuery]);
+  const filteredCards = useMemo(
+    () =>
+      words?.filter((card) =>
+        card.word.toLocaleLowerCase().includes(searchQuery.toLowerCase()),
+      ),
+    [words, searchQuery],
+  );
 
   async function onDelete(wordName: string) {
     if (user === null) {
