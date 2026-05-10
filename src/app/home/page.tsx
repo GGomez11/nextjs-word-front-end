@@ -3,18 +3,14 @@
 import WordCard from "../components/wordCard";
 import SearchBar from "../components/searchBar";
 import EmptyWordCard from "../components/emptyWordCard";
-import { useEffect, useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { Word } from "../types/word";
-import { authenticatedFetch } from "../utils/doFetch";
+import { useState, useMemo, useEffect } from "react";
 import { useAuth } from "../utils/AuthContext";
+import { useWords } from "../hooks/useWords";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [words, setWords] = useState<Word[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const router = useRouter();
   const { user, loading } = useAuth();
+  const { words, addWord, onDelete } = useWords({ user });
 
   const filteredCards = useMemo(
     () =>
@@ -23,87 +19,6 @@ export default function Home() {
       ),
     [words, searchQuery],
   );
-
-  async function onDelete(wordName: string) {
-    if (user === null) {
-      console.log("Delete error:");
-      return;
-    }
-    try {
-      const response = await authenticatedFetch(
-        "/api/words/" + wordName,
-        {
-          method: "DELETE",
-        },
-        user,
-      );
-      const updatedWords = words.filter((word) => word.word !== wordName);
-      setWords(updatedWords);
-    } catch (error) {
-      console.log("Delete error:", error);
-    }
-  }
-
-  async function addWord(word: string) {
-    if (
-      words &&
-      words.length > 0 &&
-      words.some(
-        (word_in_list) => word_in_list.word.toLowerCase() == word.toLowerCase(),
-      )
-    ) {
-      alert("Words already exists in your vocabulary");
-      return;
-    }
-
-    if (user === null) {
-      return;
-    }
-
-    try {
-      const response = await authenticatedFetch(
-        "/api/words",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ word: word }),
-        },
-        user,
-      );
-      if (!response.ok) {
-        alert("Failed to add word.");
-        return;
-      }
-      const updatedWords = await response.json();
-      setWords(updatedWords.words);
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  }
-
-  async function fetchWords() {
-    if (user === null) {
-      console.log("Delete error:");
-      return;
-    }
-
-    try {
-      const response = await authenticatedFetch("/api/words/", undefined, user);
-      const data = await response.json();
-      setWords(data.words);
-      setIsLoaded(true);
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  }
-
-  useEffect(() => {
-    if (user) {
-      fetchWords();
-    }
-  }, [user]);
 
   if (loading) {
     return <div>Loading...</div>;

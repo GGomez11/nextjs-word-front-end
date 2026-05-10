@@ -1,7 +1,7 @@
-'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '../lib/firebase-config';
+"use client";
+import { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "../lib/firebase-config";
 
 interface AuthContextType {
   user: User | null;
@@ -22,26 +22,30 @@ export function AuthContextProvider({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('Setting up auth state listener');
-    
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      
-      setUser(user);
-      setLoading(false);
-    }, (error) => {
-      console.error('Auth state change error:', error);
-      setLoading(false);
-    });
+    console.log("Setting up auth state listener");
+
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (user) => {
+        console.log("onAuthStateChanged fired, user:", user?.email);
+        setUser(user);
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Auth state change error:", error);
+        setLoading(false);
+      },
+    );
 
     // Check initial auth state
     const currentUser = auth.currentUser;
-    console.log('Initial auth state:', {
+    console.log("Initial auth state:", {
       currentUserExists: !!currentUser,
-      currentUserEmail: currentUser?.email
+      currentUserEmail: currentUser?.email,
     });
 
     return () => {
-      console.log('Cleaning up auth state listener');
+      console.log("Cleaning up auth state listener");
       unsubscribe();
     };
   }, []);
@@ -56,7 +60,7 @@ export function AuthContextProvider({
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthContextProvider');
+    throw new Error("useAuth must be used within an AuthContextProvider");
   }
   return context;
 };
